@@ -24,8 +24,8 @@
     background-color: #e30359;
     display: inline-block;
     position: relative;
-    width: 747px;
-    height: 747px;
+    width: 800px;
+    height: 800px;
 
 
     &--active{
@@ -42,6 +42,7 @@
     transition: all ease-in-out 0.5s;
     transform: scale(1);
     line-height: 0;
+    overflow: hidden;
 
     img{
       width: 100%;
@@ -49,14 +50,15 @@
   }
 
   &__text-wrapper{
+    margin-left: -4px;
     box-sizing: border-box;
-    padding: 4%;
     z-index: 1;
     width: 100%;
-    color: #e8d9a9;
-    font-size: 87px;
-    line-height: 62px;
-    font-weight: 800;
+    color: #ffd287;
+    letter-spacing: -2px;
+    font-size: 90px;
+    line-height: 64px;
+    font-weight: 900;
     position: absolute;
 
     &--shadow{
