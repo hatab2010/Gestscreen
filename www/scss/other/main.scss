@@ -13,3 +13,12 @@ body{
 .transition--disable{
   transition: initial !important;
 }
+
+/* хром, сафари */
+body::-webkit-scrollbar { width: 0; }
+
+/* ie 10+ */
+body { -ms-overflow-style: none; }
+
+/* фф (свойство больше не работает)*/
+body { overflow: -moz-scrollbars-none; }

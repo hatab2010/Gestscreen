@@ -5,6 +5,7 @@ function Product(){
 
     this.load = function(href){
         parent.load("products/"+href+".html", show);
+        
     }
 
     this.exit = null;
