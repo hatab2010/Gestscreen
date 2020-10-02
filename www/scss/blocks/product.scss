@@ -1,0 +1,42 @@
+.product{
+  transition: all ease-in-out 0.5s;
+  background-color: white;
+  opacity: 0;
+  transform: translateY(40%);
+  margin: 10% 10%;
+  padding: 40px;
+
+  &__title{
+    font-weight: 900;
+    font-size: 85px;
+    line-height: 60px;
+    padding-bottom: 30px;
+  }
+
+  &--show{
+    opacity: 1;
+    transform: translateY(0%);
+  }
+
+  &__description{
+    margin-top: 30px;
+    font-size: 36px;
+  }
+
+  ul{
+    list-style: none;
+  }
+
+  li{
+    position: relative;
+    &:after{
+      position: absolute;
+      left: -4%;
+      top: 18px;
+      content: " ";
+      width: 10px;
+      height: 10px;
+      background-color: #e30359;
+    }
+  }
+}

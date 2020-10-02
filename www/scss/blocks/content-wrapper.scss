@@ -9,4 +9,13 @@
   max-height: 1920px;
   background-color: #25283d;
   overflow: hidden;
+  box-sizing: border-box;
+  padding: 1px;
+  min-height: 1920px;
+  overflow-x: hidden;
+
+  &--relative{
+    max-height: initial;
+    overflow: visible;
+  }
 }

@@ -12,25 +12,25 @@
 </head>
 <body>
 <div class="content-wrapper">
+    <div class="alert">
+        <div class="alert__text-wrapper">
+            Не нужно
+            <br/>
+            прикасаться!
+        </div>
+        <img src="/assets/image/dontToouchImage.png" alt="" class="alert__image">
+        <div class="text-wrapper">
+            Управляйте взмахами!
+            <br/>
+            Это безопасно
+        </div>
+    </div>
     <div class="header">
         <img class="header__image" src="assets/image/header.png" alt="">
     </div>
     <div class="slider">
-        <div class="alert">
-            <div class="alert__text-wrapper">
-                Не нужно
-                <br/>
-                прикасаться!
-            </div>
-            <img src="/assets/image/dontToouchImage.png" alt="" class="alert__image">
-            <div class="text-wrapper">
-                Управляйте взмахами!
-                <br/>
-                Это безопасно
-            </div>
-        </div>
         <div class="slider__item-list">
-            <div class="slider__item" id="0">
+            <div class="slider__item" data-href="default">
                 <div class="slider__text-wrapper">
                     ЗЕРКАЛО С
                     <br/>
@@ -42,7 +42,7 @@
                     <img src="assets/image/PomThermer_01.png" alt="">
                 </div>
             </div>
-            <div class="slider__item slider__item--active" id="1">
+            <div class="slider__item slider__item--active" data-href="default" id="1">
                 <div class="slider__text-wrapper">
                     ЗЕРКАЛО С
                     <br/>
@@ -54,7 +54,7 @@
                     <img src="assets/image/PomThermer_01.png" alt="">
                 </div>
             </div>
-            <div class="slider__item" id="2">
+            <div class="slider__item" data-href="default">
                 <div class="slider__text-wrapper">
                     ЗЕРКАЛО С
                     <br/>
@@ -66,7 +66,7 @@
                     <img src="assets/image/PomThermer_01.png" alt="">
                 </div>
             </div>
-            <div class="slider__item" id="3">
+            <div class="slider__item" data-href="default">
                 <div class="slider__text-wrapper">
                     ЗЕРКАЛО С
                     <br/>
@@ -78,7 +78,7 @@
                     <img src="assets/image/PomThermer_01.png" alt="">
                 </div>
             </div>
-            <div class="slider__item" id="4">
+            <div class="slider__item" data-href="default">
                 <div class="slider__text-wrapper">
                     ЗЕРКАЛО С
                     <br/>
@@ -94,7 +94,7 @@
                 <div class="slider__text-wrapper">
                     ЗЕРКАЛО С
                     <br/>
-                    _ТЕРМОМЕТРОМ
+                    ТЕРМОМЕТРОМ
                     <br/>
                     POM THERMIR
                 </div>
@@ -104,8 +104,13 @@
             </div>
         </div>
     </div>
+    <div class="likes"></div>
+    <div class="product"></div>
 </div>
+<script src="assets/js/product.js"></script>
 <script src="assets/js/slider.js"></script>
+<script src="assets/js/header.js"></script>
+<script src="assets/js/alert.js"></script>
 <script src="assets/js/main.js"></script>
 </body>
 </html>

@@ -1,5 +1,7 @@
 .header{
+  transition: all ease-in-out 0.5s;
   position: absolute;
+  transform: translateY(-110%);
   top: 0;
   left: 0;
   color: white;
@@ -8,8 +10,11 @@
   font-weight: 900;
   width: 100%;
   background-color: #142664;
-  box-shadow: -2px 14px 46px -7px rgba(0,0,0,0.58);
   z-index: 99;
+
+  &--show{
+    transform: translateY(0%);
+  }
 
   &__image{
     width: 100%;

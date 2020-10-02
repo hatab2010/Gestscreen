@@ -1,101 +1,158 @@
+function Slider(){
+    let _this = this;
+    const pseudoHeight = 900000;
+    const scrollRefreshDelta = 10000;
+
     let carriage = $(".slider__item-list"),
-        offsetTop = 0,
+        scrollOffset = 0,
         itemHeight,
         sliderOffset = 0,
-        isActive = false;
+        isActive = false,
+        centerTimer;
 
-    $(window).on("load", function(){
-        $("body").css("height", 900000);
-        window.scrollTo(0, 999999/2)
-        offsetTop = $(document).scrollTop();
-        itemHeight = $(".slider__item").outerHeight(true);
-        isActive = true;
+    //Events
+    $(window).on("load", function () {
+        enable();
     })
 
-    $(document).on("scroll", function(e){
+    $(document).on("scroll", update);
 
-    })
-
-    $(document).on("scroll", function(e){
-        if (!isActive) return;
-
-        let currentOffsetTop  = $(window).scrollTop();
-        let offsetDelta = offsetTop - currentOffsetTop;
-        if (Math.abs(offsetDelta) > 10000) {
-            offsetTop = currentOffsetTop;
+    $(document).keydown(function(e){
+        if (isActive === false)
             return;
+
+        if(e.keyCode == 13) //Enter
+        {
+            linkEnter();
+        }
+    });
+
+    //Public
+    this.isEnable = function(value, callback){
+        if (value === true){
+            $(".slider").on("transitionend",listener);
+            enable();
+        }
+        else{
+            $(".slider").on("transitionend",listener);
+            disable();
         }
 
-        if (currentOffsetTop < 1000 || currentOffsetTop > 800000){
-            window.scrollTo(0, 999999/2)
+        function listener(){
+            if (callback)
+                callback();
+            $(".slider").off("transitionend", listener);
+        }
+    }
+
+    this.onLinkEnter = null;
+
+    //Private
+    function enable(){
+        $("body").css("height", pseudoHeight);
+        window.scrollTo(0, pseudoHeight / 2)
+        scrollOffset = $(document).scrollTop();
+        itemHeight = $(".slider__item").outerHeight(true);
+
+        if (!$(".slider").hasClass("slider--hide")){
+            isActive = true;
+        }
+
+        $(".slider").on("transitionend", listener)
+                    .removeClass("slider--hide")
+
+        function listener(){
+            isActive = true;
+            $(".slider").off("transitionend", listener);
+        }
+    }
+
+    function disable(){
+        isActive = false;
+        $("body").removeAttr("style");
+        $(".slider").addClass("slider--hide")
+    }
+
+    function linkEnter(){
+        if (!isActive) return null;
+        let href = $(".slider__item--active").data("href");
+
+        if (_this.onLinkEnter)
+            _this.onLinkEnter(href);
+    }
+
+    function update(){
+        if (!isActive) return;
+
+        if (_this.linkEnter)
+            _this.linkEnter("href")
+
+        carriage.stop();
+        let currentOffsetTop = $(window).scrollTop();
+        let offsetDelta = scrollOffset - currentOffsetTop;
+        if (Math.abs(offsetDelta) > scrollRefreshDelta) {
+            scrollOffset = currentOffsetTop;
+            return;
+        }
+        if (centerTimer) clearTimeout(centerTimer);
+        centerTimer = setTimeout(setCenter, 500);
+
+        if (currentOffsetTop < scrollRefreshDelta || currentOffsetTop > pseudoHeight - scrollRefreshDelta) {
+            window.scrollTo(0, pseudoHeight / 2)
         }
 
         sliderOffset += offsetDelta;
-        offsetTop = currentOffsetTop;
+        scrollOffset = currentOffsetTop;
 
-        if (sliderOffset > 0){
+        if (sliderOffset > 0) {
             upendLastSlide();
             setActiveSlide();
         }
 
-        if (sliderOffset < -itemHeight)
-        {
+        if (sliderOffset < -itemHeight) {
             upendFirstSlide();
             setActiveSlide();
         }
 
         carriage.css("top", sliderOffset);
-        activeAlert();
-    });
+    }
 
-    function upendLastSlide(){
+    function upendLastSlide() {
         let lastEl = $(".slider__item").last();
         $(".slider__item-list").prepend(lastEl);
-        $(".slider__item-list").addClass("transition--disable");
         sliderOffset -= itemHeight;
         carriage.css("top", sliderOffset);
-        let t = $(".slider__item-list")[0].offsetHeight; //Trigger a reflow, flushing the CSS changes
-        $(".slider__item-list").removeClass("transition--disable");
+        //let t = $(".slider__item-list")[0].offsetHeight; //Trigger a reflow, flushing the CSS changes
     }
 
-    function upendFirstSlide(){
+    function setCenter(){
+        let viewCenter = $(".slider").height()/2;
+        let activeSlideOffset = $(".slider__item--active").offset().top - $(".slider").offset().top;
+        let activeSlideHeight = $(".slider__item--active").height();
+        let offset = sliderOffset + viewCenter - activeSlideOffset - activeSlideHeight/2;
+        //sliderOffset += offset;
+        carriage.animate({"top": offset},{
+            duration: 500,
+            step: function(now,b){
+                sliderOffset = now;
+            }
+        })
+        //carriage.css("top", sliderOffset);
+    }
+
+    function upendFirstSlide() {
         let firstEl = $(".slider__item").first();
         $(".slider__item-list").append(firstEl);
-        $(".slider__item-list").addClass("transition--disable");
         sliderOffset += itemHeight;
         carriage.css("top", sliderOffset);
-        let t = $(".slider__item-list")[0].offsetHeight; //Trigger a reflow, flushing the CSS changes
-        $(".slider__item-list").removeClass("transition--disable");
+        //let t = $(".slider__item-list")[0].offsetHeight; //Trigger a reflow, flushing the CSS changes
     }
 
-    function setActiveSlide(){
+    function setActiveSlide() {
         let items = $(".slider__item");
         items.removeClass("slider__item--active");
         items.eq(1).addClass("slider__item--active");
     }
+}
 
-    let alertDisable;
-    let alert = $(".alert");
-    function activeAlert(){
-        alert.addClass("alert--active");
-        if (alertDisable) clearTimeout(alertDisable);
 
-        alertDisable = setTimeout(function(){
-            alert.removeClass("alert--active");
-        }, 1000)
-    }
-
-    function test(){
-    }
-
-    function setCurrentSlide(id){
-        let index = $(".slider__item").index($("#"+id));
-    }
-
-    function refreshScrollProperty(){
-        $(document).scrollTop(2000);
-    }
-
-    function setCenter(){
-
-    }

@@ -1,6 +1,7 @@
 .alert{
   transition: all ease-in-out 0.5s;
-  position: absolute;
+  position: fixed;
+
   top: 300px;
   left: 0;
   right: 0;
