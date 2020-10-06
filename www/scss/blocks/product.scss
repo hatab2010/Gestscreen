@@ -3,14 +3,36 @@
   background-color: white;
   opacity: 0;
   transform: translateY(40%);
-  margin: 10% 10%;
+  margin: 10% auto;
   padding: 40px;
+  max-width: 800px;
+  box-sizing: border-box;
+
+  &__image{
+    margin-top: 30px;
+    img{
+      width: 100%;
+    }
+  }
 
   &__title{
     font-weight: 900;
-    font-size: 85px;
-    line-height: 60px;
-    padding-bottom: 30px;
+    font-size: 81px;
+    line-height: 57px;
+    letter-spacing: -3px;
+  }
+
+  &__logo{
+    margin-top: 30px;
+    width: 30%;
+
+    img{
+      width: 100%;
+    }
+
+    &--right{
+      float: right;
+    }
   }
 
   &--show{
@@ -20,12 +42,28 @@
 
   &__description{
     margin-top: 30px;
-    font-size: 36px;
+    font-size: 30px;
   }
 
   ul{
     list-style: none;
   }
+
+  &__video{
+    margin-top: 30px;
+    width: 100%;
+  }
+
+  &__asc{
+    margin-top: 30px;
+    margin-bottom: -15%;
+    text-align: center;
+
+    img{
+      display: inline-block;
+    }
+  }
+
 
   li{
     position: relative;

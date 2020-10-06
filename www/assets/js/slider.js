@@ -46,6 +46,7 @@ function Slider(){
     }
 
     this.onLinkEnter = null;
+    this.selectItem = null;
 
     //Private
     function enable(){
@@ -94,8 +95,8 @@ function Slider(){
             scrollOffset = currentOffsetTop;
             return;
         }
-        if (centerTimer) clearTimeout(centerTimer);
-        centerTimer = setTimeout(setCenter, 500);
+        // if (centerTimer) clearTimeout(centerTimer);
+        // centerTimer = setTimeout(setCenter, 500);
 
         if (currentOffsetTop < scrollRefreshDelta || currentOffsetTop > pseudoHeight - scrollRefreshDelta) {
             window.scrollTo(0, pseudoHeight / 2)
@@ -152,6 +153,9 @@ function Slider(){
         let items = $(".slider__item");
         items.removeClass("slider__item--active");
         items.eq(1).addClass("slider__item--active");
+
+        if (_this.selectItem)
+            _this.selectItem($(".slider__item--active").attr("id"));
     }
 }
 

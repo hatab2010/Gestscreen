@@ -10,6 +10,20 @@ body{
   height: 100%;
 }
 
+.color{
+  &--dark-blue{
+    color: #00344e;
+  }
+
+  &--grey{
+    color: #5e5e5e;
+  }
+
+  &--red{
+    color: #dd1a31 !important;
+  }
+}
+
 .transition--disable{
   transition: initial !important;
 }

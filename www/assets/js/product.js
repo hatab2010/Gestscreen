@@ -3,9 +3,14 @@ function Product(){
     let isActive = false;
     let _this = this;
 
-    this.load = function(href){
-        parent.load("products/"+href+".html", show);
-        
+    this.load = function(href, callback){
+        let cal = callback;
+        parent.load("products/"+href+".html",
+            function(){
+                show(function(){
+                    if (callback) callback();
+                })
+            });
     }
 
     this.exit = null;
@@ -18,7 +23,7 @@ function Product(){
         }
     })
 
-    function show(){
+    function show(callback){
         $(".product").on("transitionend", listener)
 
         $(".product").addClass("product--show");
@@ -29,6 +34,7 @@ function Product(){
 
         function listener(){
             isActive = true;
+            if(callback) callback();
             $(".product").off("transitionend", listener);
         }
     }
