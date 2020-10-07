@@ -19,7 +19,10 @@ slider.onLinkEnter = function(href){
     header.isEnable(false);
 };
 
-product.exit = function() {
+product.onExit = function() {
+    if (likes.isPopUpShow == true)
+        return;
+
     video.isEnable(false);
     slider.isEnable(true, function(){
 

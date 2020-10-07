@@ -1,15 +1,14 @@
 .alert{
   transition: all ease-in-out 0.5s;
   position: fixed;
-
   top: 300px;
   left: 0;
   right: 0;
   margin: auto;
   max-width: 210px;
   z-index: 99;
-  background-color: #9b8579;
-  color: white;
+  background-color: #ffffff;
+  color: #4d4d4d;
   font-weight: 600;
   font-size: 28px;
   text-align: center;
@@ -17,7 +16,7 @@
   opacity: 0;
 
   &__text-wrapper{
-    color: white;
+    color: #4d4d4d;
   }
 
   &__image{

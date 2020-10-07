@@ -13,12 +13,12 @@ function Product(){
             });
     }
 
-    this.exit = null;
+    this.onExit = null;
 
     $(document).keydown(function(e){
         if (isActive == false) return;
 
-        if (e.keyCode == 27){
+        if (e.keyCode == 13){
             disable();
         }
     })
@@ -40,14 +40,17 @@ function Product(){
     }
 
     function disable(){
+        if ($(".likes__pop-up").hasClass("likes__pop-up--show"))
+            return;
+
         isActive = false;
 
         $(parent).on("transitionend", listener);
 
         function listener(){
             $(".content-wrapper").removeAttr("style");
-            if (_this.exit)
-                _this.exit();
+            if (_this.onExit)
+                _this.onExit();
             $(parent).off("transitionend", listener);
         }
 
